@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramon &amp; Cristina · 3 de Julio de 2027</title>
+  <meta name="description" content="Boda de Ramon y Cristina — 3 de julio de 2027. Confirmación de asistencia." />
+
+  
+  
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)" />
+<link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin />
+<link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap)" rel="stylesheet" />
+
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#portada" class="nav__brand">R <span>&amp;</span> C</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__links" id="navLinks">
+      <a href="#nuestra-boda">Nuestra Boda</a>
+      <a href="#detalles">Detalles</a>
+      <a href="#vestimenta">Vestimenta</a>
+      <a href="#rsvp">Confirmar</a>
+    </nav>
+  </header>
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="hero" id="portada">
+    <div class="hero__ornament hero__ornament--tl" aria-hidden="true"></div>
+    <div class="hero__ornament hero__ornament--br" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Nos casamos</p>
+
+      <h1 class="hero__names">
+        <span class="hero__name">Ramón</span>
+        <span class="hero__amp">&amp;</span>
+        <span class="hero__name">Cristina</span>
+      </h1>
+
+      <p class="hero__date">
+        <span>03</span><i>·</i><span>07</span><i>·</i><span>2027</span>
+      </p>
+
+      <div class="hero__photo">
+        <!-- CAMBIA AQUÍ la foto de los novios -->
+        <img
+          src="img/retraroRamonCristina.jpg"
+          alt="Ramon y Cristina" />
+      </div>
+
+      <p class="hero__place">
+  <span>Parroquia de Nuestro Padre Jesús de la Pasión</span>
+  <i class="hero__place-sep">&amp;</i>
+  <span>Cortijo el Trobal</span>
+</p>
+
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="countdown__box"><span class="countdown__num" id="cdDays">—</span><span class="countdown__label">Días</span></div>
+        <div class="countdown__box"><span class="countdown__num" id="cdHours">—</span><span class="countdown__label">Horas</span></div>
+        <div class="countdown__box"><span class="countdown__num" id="cdMins">—</span><span class="countdown__label">Minutos</span></div>
+        <div class="countdown__box"><span class="countdown__num" id="cdSecs">—</span><span class="countdown__label">Segundos</span></div>
+      </div>
+
+      <p class="hero__remaining">Ya solo quedan…</p>
+
+      <a href="#rsvp" class="btn btn--primary">Confirmar asistencia</a>
+    </div>
+
+    <a href="#nuestra-boda" class="hero__scroll" aria-label="Bajar">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- ============ 2. NUESTRA BODA ============ -->
+  <section class="section section--alt" id="nuestra-boda">
+    <div class="wrap wrap--narrow">
+      <div class="ornament" aria-hidden="true"></div>
+      <p class="section__eyebrow">Nuestra historia</p>
+      <h2 class="section__title">Un momento único<br>en nuestras vidas</h2>
+
+      <p class="lead">
+        Todo empezó con una mirada cómplice y la promesa de un café. Desde entonces
+        hemos aprendido que lo mejor no se planea: sucede. Y ahora, después de tantos
+        viajes, risas y domingos lentos, hemos decidido decir «sí» delante de las
+        personas que hacen nuestra vida más grande.
+      </p>
+      <p class="lead">
+        Queremos que este 3 de julio de 2027 sea un día sencillo, luminoso y lleno
+        de gente querida. Sin prisa, con buena mesa, buena música y el atardecer
+        como testigo. Ojalá puedas estar ahí.
+      </p>
+
+      <div class="divider" aria-hidden="true"><span>❦</span></div>
+
+      <div class="facts">
+        <div class="facts__item">
+          <span class="facts__num">+10</span>
+          <span class="facts__label">años juntos</span>
+        </div>
+        
+        <div class="facts__item">
+          <span class="facts__num">∞</span>
+          <span class="facts__label">plan: celebrarlo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. DETALLES ============ -->
+  <section class="section" id="detalles">
+    <div class="wrap">
+      <div class="ornament" aria-hidden="true"></div>
+      
+      <h2 class="section__title">El gran día</h2>
+      
+      <div class="cards">
+        <!-- CEREMONIA -->
+        <article class="card">
+          <p class="card__tag">La ceremonia</p>
+          
+          <div class="card__illo">
+            <img src="img/IglesiaLasPortadas.jpg" alt="Ilustración de la Parroquia de Nuestro Padre Jesús de la Pasión" />
+          </div>
+          
+          <h3 class="card__title">Parroquia de Nuestro Padre Jesús de la Pasión</h3>
+          <p class="card__text">
+            Dos Hermanas<br />
+            41701 Sevilla
+          </p>
+          <p class="card__time">12:30 h</p>
+          <a class="btn btn--primary"
+     href="[maps.app.goo.gl](https://maps.app.goo.gl/DiA7tJP4TywKcPKz6)"
+     target="_blank" rel="noopener">
+    Ver ubicación
+  </a>
+</article>
+
+
+<!-- HACIENDA -->
+<article class="card">
+  <p class="card__tag">La celebración</p>
+  
+  <div class="card__illo">
+    <img src="img/CortijoTrobal.jpg" alt="Ilustración del Cortijo el Trobal" />
+  </div>
+  
+  <h3 class="card__title">Cortijo el Trobal</h3>
+  <p class="card__text">
+    N-4, km 0,4<br />
+    41727 Maribáñez, Sevilla
+  </p>
+  <p class="card__time">14:30 h</p>
+  <a class="btn btn--primary"
+     href="[maps.app.goo.gl](https://maps.app.goo.gl/QuVU525LRY3GPFm59)"
+     target="_blank" rel="noopener">
+    Ver ubicación
+  </a>
+</article>
+
+      </div>
+      
+      <!-- Horario -->
+      <div class="timeline">
+  <h3 class="subhead">El programa</h3>
+
+  <ul class="timeline__list">
+    <li>
+      <span class="timeline__h">12:30</span>
+      <span class="timeline__t">Ceremonia</span>
+      <img class="timeline__illo" src="img/programa/anillos.png" alt="" />
+    </li>
+    <li>
+      <span class="timeline__h">14:30</span>
+      <span class="timeline__t">Cocktail</span>
+      <img class="timeline__illo" src="img/programa/cocktail.png" alt="" />
+    </li>
+    <li>
+      <span class="timeline__h">18:30</span>
+      <span class="timeline__t">Cena</span>
+      <img class="timeline__illo" src="img/programa/cena.png" alt="" />
+    </li>
+    <li>
+      <span class="timeline__h">20:30</span>
+      <span class="timeline__t">La tarta</span>
+      <img class="timeline__illo" src="img/programa/tarta.png" alt="" />
+    </li>
+    <li>
+      <span class="timeline__h">22:00</span>
+      <span class="timeline__t">La fiesta</span>
+      <img class="timeline__illo" src="img/programa/baile.png" alt="" />
+    </li>
+    <li>
+      <span class="timeline__h">03:00</span>
+      <span class="timeline__t">Vuelta</span>
+      <img class="timeline__illo" src="img/programa/vuelta.png" alt="" />
+    </li>
+  </ul>
+</div>
+
+
+     
+      <!-- Imágenes del lugar -->
+<h3 class="subhead subhead--center">Nuestros momentos</h3>
+<div class="gallery">
+  <figure class="gallery__item">
+    <img src="img/nosotros/2.jpeg" alt="Ramon y Cristina" loading="lazy" />
+    <figcaption>Complicidad</figcaption>
+  </figure>
+  <figure class="gallery__item">
+    <img src="img/nosotros/1.jpeg" alt="Ramon y Cristina" loading="lazy" />
+    <figcaption>Celebrarnos</figcaption>
+  </figure>
+  <figure class="gallery__item">
+    <img src="img/nosotros/3.jpeg" alt="Ramon y Cristina" loading="lazy" />
+    <figcaption>Caminando</figcaption>
+  </figure>
+  <figure class="gallery__item">
+    <img src="img/nosotros/4.jpeg" alt="Ramon y Cristina" loading="lazy" />
+    <figcaption>Refugio</figcaption>
+  </figure>
+  
+</div>
+
+
+      <div class="note">
+  <p><strong>Taxis:</strong> habilitaremos taxis para que podáis llamarlos y usarlos
+  cuando queráis. Si necesitas uno, avísanos en el formulario y te pasamos el
+  teléfono al que pedirlo.</p>
+</div>
+
+    </div>
+  </section>
+
+  <!-- ============ 4. CÓDIGO DE VESTIMENTA ============ -->
+  <section class="section section--alt" id="vestimenta">
+    <div class="wrap wrap--narrow center">
+      <div class="ornament" aria-hidden="true"></div>
+      <p class="section__eyebrow">Dress code</p>
+      <h2 class="section__title">Etiqueta campestre</h2>
+
+      <p class="lead">
+        Elegante pero cómodo: la celebración es al aire libre y el suelo de la
+        hacienda es de tierra y grava.
+      </p>
+
+      <div class="swatches" aria-hidden="true">
+        <span style="background:#555B43"></span>
+        <span style="background:#929477"></span>
+        <span style="background:#C6A66B"></span>
+        <span style="background:#C8C5A9"></span>
+        <span style="background:#D9CFC1"></span>
+        <span style="background:#55534C"></span>
+      </div>
+
+      <p class="dresscode__avoid">
+        Os pedimos, por favor, <strong>evitar los colores blancos, beige y crema</strong>
+        — están reservados para la novia.
+      </p>
+
+      <p class="dresscode__tip">
+        Zapato cómodo o tacón ancho · Chaqueta ligera para la noche · Sombrero bienvenido
+      </p>
+
+      <a class="btn btn--ghost"
+         href="https://es.pinterest.com/search/pins/?q=boda%20rustica%20elegante%20invitados"
+         target="_blank" rel="noopener">
+        Ver tablero de inspiración
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ 5. RSVP ============ -->
+  <section class="section" id="rsvp">
+    <div class="wrap wrap--narrow">
+      <div class="ornament" aria-hidden="true"></div>
+      <p class="section__eyebrow">Confirma tu asistencia</p>
+      <h2 class="section__title">¿Nos acompañas?</h2>
+      <p class="lead center">
+        Rellena el formulario antes del <strong>1 de mayo de 2027</strong>.
+        Te llevará menos de un minuto y nos ayudas muchísimo a organizarlo todo.
+      </p>
+
+      <form class="form" id="rsvpForm" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre y apellidos <span aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Ej. Ana García Ruiz" required />
+          <small class="error" data-error-for="nombre"></small>
+        </div>
+
+        <fieldset class="field">
+          <legend>¿Vas a poder venir? <span aria-hidden="true">*</span></legend>
+          <div class="radios">
+            <label class="radio">
+              <input type="radio" name="asistencia" value="si" required />
+              <span class="radio__mark"></span>
+              <span class="radio__text">Sí, ahí estaré</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="asistencia" value="no" />
+              <span class="radio__mark"></span>
+              <span class="radio__text">No podré ir</span>
+            </label>
+          </div>
+          <small class="error" data-error-for="asistencia"></small>
+        </fieldset>
+
+        <div class="field" id="acompanantesField">
+          <label for="acompanantes">Número de acompañantes</label>
+          <select id="acompanantes" name="acompanantes">
+            <option value="0">0 — voy solo/a</option>
+            <option value="1">1 acompañante</option>
+            <option value="2">2 acompañantes</option>
+            <option value="3">3 acompañantes</option>
+            <option value="4">4 acompañantes</option>
+          </select>
+          <small class="hint">Cuéntanos también quiénes vienen, si quieres, en el último campo.</small>
+        </div>
+
+        <div class="field" id="alergiasField">
+          <label for="alergias">Restricciones alimentarias o alergias</label>
+          <textarea id="alergias" name="alergias" rows="3" placeholder="Ej. celiaquía, intolerancia a la lactosa, vegetariano/a, alergia a los frutos secos…"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="comentarios">¿Algo más que debamos saber?</label>
+          <textarea id="comentarios" name="comentarios" rows="2" placeholder="Canciones, autobús, alguna sorpresa…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full" id="submitBtn">Enviar confirmación</button>
+
+        <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="closing">
+    <div class="wrap center">
+      <p class="closing__script">Nuestro regalo</p>
+      <p class="closing__text">es tu presencia</p>
+      <div class="ornament" aria-hidden="true"></div>
+      <p class="closing__monogram">R &amp; C</p>
+      <p class="closing__date">03 · 07 · 2027</p>
+      <p class="closing__hashtag">#RamonYCristina2027</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Hecho con mucho cariño para celebrar el 3 de julio de 2027.</p>
+  </footer>
+
+  <!-- ============ REPRODUCTOR FLOTANTE ============ -->
+<button class="music-btn" id="musicBtn"
+        aria-label="Reproducir música"
+        aria-pressed="false"
+        data-tooltip="Bruno Mars — Marry You">
+  <span class="music-btn__icon" aria-hidden="true">
+    <!-- pausa (oculto por defecto) -->
+    <svg class="music-btn__pause" viewBox="0 0 24 24" fill="currentColor">
+      <rect x="6" y="5" width="4" height="14" rx="1"/>
+      <rect x="14" y="5" width="4" height="14" rx="1"/>
+    </svg>
+    <!-- play -->
+    <svg class="music-btn__play" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5.5v13a1 1 0 001.5.87l11-6.5a1 1 0 000-1.74l-11-6.5A1 1 0 008 5.5z"/>
+    </svg>
+  </span>
+  <span class="music-btn__ring" aria-hidden="true"></span>
+</button>
+
+<audio id="weddingMusic" loop preload="auto">
+  <source src="audio/BrunoMars.mp3" type="audio/mpeg" />
+  Tu navegador no soporta audio.
+</audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
