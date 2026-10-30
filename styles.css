@@ -1260,3 +1260,69 @@ h1, h2, h3, h4 {
   .music-btn { transition: none; }
 }
 
+/* ---------- PANTALLA DE SOBRE ---------- */
+.sobre {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(200, 197, 169, 0.35), transparent 60%),
+    var(--crema-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: opacity 2.2s ease, visibility 2.2s ease;
+}
+
+/* al abrirse, la capa se desvanece */
+.sobre.is-abierto {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* el sobre, ocupando casi toda la pantalla */
+.sobre__img {
+  width: min(94vw, 720px);
+  max-height: 74vh;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 2.2s cubic-bezier(0.34, 1.1, 0.64, 1);
+}
+
+/* al abrirse, se acerca un poco mientras se funde */
+.sobre.is-abierto .sobre__img {
+  transform: scale(1.05) translateY(-8px);
+}
+
+.sobre__pista {
+  margin-top: 34px;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--verde-suave);
+  animation: latirPista 2.4s ease-in-out infinite;
+}
+
+@keyframes latirPista {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+
+/* bloquea el scroll mientras el sobre está cerrado */
+body.sobre-activo { overflow: hidden; }
+
+@media (max-width: 760px) {
+  .sobre { padding: 16px; }
+  .sobre__img { width: 92vw; max-height: 66vh; }
+  .sobre__pista { margin-top: 26px; font-size: 0.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sobre, .sobre__img { transition: none; }
+  .sobre__pista { animation: none; }
+}

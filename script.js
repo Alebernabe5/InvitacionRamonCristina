@@ -387,4 +387,39 @@ if (musicBtn && music) {
 }
 
 
+/* ------------------------------------------------------------------
+   8. PANTALLA DE SOBRE
+   ------------------------------------------------------------------ */
+var sobre = document.getElementById('sobre');
+
+if (sobre) {
+  document.body.classList.add('sobre-activo');
+
+  function abrirSobre() {
+    if (sobre.classList.contains('is-abierto')) return;
+
+    sobre.classList.add('is-abierto');
+    document.body.classList.remove('sobre-activo');
+
+    // Cuando la animación termina, retiramos la capa del todo
+    setTimeout(function () {
+      sobre.setAttribute('hidden', '');
+    }, 1100);
+
+    // Y aquí arrancamos la música, que ya viene de un clic real
+    if (typeof music !== 'undefined' && music && music.paused) {
+      music.play().catch(function () {});
+    }
+  }
+
+  sobre.addEventListener('click', abrirSobre);
+  sobre.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      abrirSobre();
+    }
+  });
+}
+
+
 })();
