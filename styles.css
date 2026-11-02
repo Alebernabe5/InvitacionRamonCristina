@@ -599,43 +599,112 @@ h1, h2, h3, h4 {
 
 
 
-/* ---------- TIMELINE ---------- */
+/* ---------- ITINERARIO ---------- */
 .timeline__list {
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  max-width: 760px;
+  max-width: 720px;
   position: relative;
 }
 
-/* eje */
+/* eje central punteado */
 .timeline__list::before {
   content: "";
   position: absolute;
-  top: 8px;
-  bottom: 8px;
+  top: 0;
+  bottom: 0;
   left: 50%;
   width: 1px;
-  background: linear-gradient(180deg, transparent, var(--floral), var(--floral), transparent);
+  background: repeating-linear-gradient(
+    180deg,
+    var(--floral) 0 6px,
+    transparent 6px 12px
+  );
 }
 
 .timeline__list li {
   display: grid;
-  /* izquierda vacía · imagen centrada sobre el eje · derecha vacía */
-  grid-template-columns: 1fr minmax(140px, 180px) 1fr;
-  grid-template-rows: auto auto auto;
-  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   align-items: center;
-  padding: 26px 0;
+  padding: 28px 0;
   position: relative;
+  min-height: 150px;
 }
 
-/* la acuarela, centrada sobre la línea */
-.timeline__illo {
+/* ---- IMPARES: imagen a la izquierda, texto a la derecha ---- */
+.timeline__list li:nth-child(odd) .timeline__illo {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  justify-self: center;
+}
+
+.timeline__list li:nth-child(odd) .timeline__h {
   grid-column: 2;
   grid-row: 1;
-  width: 140px;
-  height: 140px;
+  align-self: end;
+  text-align: left;
+  padding-left: 46px;
+  padding-bottom: 3px;
+}
+
+.timeline__list li:nth-child(odd) .timeline__t {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  text-align: left;
+  padding-left: 46px;
+  padding-top: 3px;
+}
+
+/* ---- PARES: texto a la izquierda, imagen a la derecha ---- */
+.timeline__list li:nth-child(even) .timeline__illo {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: center;
+}
+
+.timeline__list li:nth-child(even) .timeline__h {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  text-align: right;
+  padding-right: 46px;
+  padding-bottom: 3px;
+}
+
+.timeline__list li:nth-child(even) .timeline__t {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  text-align: right;
+  padding-right: 46px;
+  padding-top: 3px;
+}
+
+/* ---- hora y nombre ---- */
+.timeline__h {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--oro);
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.timeline__t {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--verde);
+  line-height: 1.4;
+}
+
+/* ---- la acuarela ---- */
+.timeline__illo {
+  width: 132px;
+  height: 132px;
   object-fit: contain;
   -webkit-mask-image:
     linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%),
@@ -647,45 +716,20 @@ h1, h2, h3, h4 {
   mask-composite: intersect;
 }
 
-/* hora, debajo de la imagen y centrada */
-.timeline__h {
-  grid-column: 2;
-  grid-row: 2;
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  color: var(--oro);
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  margin-top: 2px;
-}
-
-/* el hito, justo debajo de la hora */
-.timeline__t {
-  grid-column: 2;
-  grid-row: 3;
-  font-family: var(--sans);
-  font-size: 1rem;
-  font-weight: 500;          /* ← el peso que lo hace resaltar */
-  letter-spacing: 0.06em;
-  color: var(--verde);       /* ← el verde de los títulos, no el gris */
-}
-
-/* el marcador dorado del eje, por debajo del bloque */
+/* ---- punto dorado sobre el eje ---- */
 .timeline__list li::after {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--oro);
   z-index: 1;
 }
 
-/* el eje no debe verse por detrás de la acuarela */
-.timeline__illo { background: var(--crema); }
 
 
 
@@ -1126,27 +1170,60 @@ h1, h2, h3, h4 {
 
   .facts__label { font-size: 0.6rem; letter-spacing: 0.16em; }
 
-  .timeline__list::before { left: 0; }
+   /* el eje vuelve al centro */
+  .timeline__list::before {
+    left: 50%;
+  }
 
+  /* dos columnas y la misma alternancia que en escritorio */
   .timeline__list li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    padding: 20px 0;
+    min-height: 0;
+    row-gap: 0;
+  }
+
+  /* menos aire que en escritorio, que aquí no cabe */
+  .timeline__list li:nth-child(odd) .timeline__h,
+  .timeline__list li:nth-child(odd) .timeline__t {
     padding-left: 20px;
   }
 
-  .timeline__list li::before {
-    content: "";
-    position: absolute;
-    left: -3px;
-    top: 22px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--oro);
+  .timeline__list li:nth-child(even) .timeline__h,
+  .timeline__list li:nth-child(even) .timeline__t {
+    padding-right: 20px;
   }
 
-  .timeline__h { text-align: left; }
+  /* la acuarela, más pequeña */
+  .timeline__illo {
+    width: 100px;
+    height: 100px;
+  }
+
+  /* tipografía reducida para que entre el texto */
+  .timeline__h {
+    font-size: 1.05rem;
+  }
+
+  .timeline__t {
+    font-size: 0.85rem;
+  }
+
+  /* el punto vuelve al centro del eje */
+  .timeline__list li::after {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+ 
+
+
+
+
+
 
   .form { padding: 34px 22px; }
 
