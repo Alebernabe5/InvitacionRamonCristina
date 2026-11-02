@@ -434,7 +434,7 @@ h1, h2, h3, h4 {
 }
 
 .hero__remaining {
-  font-size: 0.78rem;
+  font-size: 1.3rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--verde-suave);
@@ -992,6 +992,41 @@ h1, h2, h3, h4 {
 }
 
 .footer p { margin: 0; }
+
+.footer__logo {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 14px;
+  padding: 0;
+}
+
+.footer__logo img {
+  width: min(46vw, 350px);
+  height: auto;
+  display: block;
+}
+
+/* ---------- RELOJ DE ARENA ---------- */
+.timer-arena {
+  display: block;
+  margin: 0 auto 18px;
+  width: min(50vw, 140px);
+  height: auto;
+  transform-origin: center center;
+  animation: mecerArena 4s ease-in-out infinite;
+}
+
+@keyframes mecerArena {
+  0%   { transform: rotate(-4deg); }
+  50%  { transform: rotate(4deg); }
+  100% { transform: rotate(-4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timer-arena { animation: none; }
+}
+
+
 
 /* ---------- Animación de entrada ---------- */
 .reveal {
