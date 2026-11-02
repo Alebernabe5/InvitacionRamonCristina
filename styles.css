@@ -637,8 +637,10 @@ h1, h2, h3, h4 {
 .timeline__list li:nth-child(odd) .timeline__illo {
   grid-column: 1;
   grid-row: 1 / span 2;
-  justify-self: center;
+  justify-self: end;        /* era center */
+  margin-right: 34px;       /* separa del eje */
 }
+
 
 .timeline__list li:nth-child(odd) .timeline__h {
   grid-column: 2;
@@ -662,8 +664,10 @@ h1, h2, h3, h4 {
 .timeline__list li:nth-child(even) .timeline__illo {
   grid-column: 2;
   grid-row: 1 / span 2;
-  justify-self: center;
+  justify-self: start;      /* era center */
+  margin-left: 34px;
 }
+
 
 .timeline__list li:nth-child(even) .timeline__h {
   grid-column: 1;
@@ -703,8 +707,8 @@ h1, h2, h3, h4 {
 
 /* ---- la acuarela ---- */
 .timeline__illo {
-  width: 132px;
-  height: 132px;
+  width: 190px;
+  height: 190px;
   object-fit: contain;
   -webkit-mask-image:
     linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%),
