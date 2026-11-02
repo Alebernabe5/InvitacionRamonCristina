@@ -156,6 +156,11 @@
   var submitBtn = document.getElementById('submitBtn');
   var acompanantesField = document.getElementById('acompanantesField');
   var alergiasField = document.getElementById('alergiasField');
+  var taxiField = document.getElementById('taxiField');        
+  var cancionField = document.getElementById('cancionField'); 
+  var acompanantesSelect = document.getElementById('acompanantes');
+  var acompanantesNombres = document.getElementById('acompanantesNombres');
+
 
   function setError(name, msg) {
     var small = form.querySelector('[data-error-for="' + name + '"]');
@@ -175,7 +180,7 @@
     var asistencia = form.querySelector('input[name="asistencia"]:checked');
     var noViene = asistencia && asistencia.value === 'no';
 
-    [acompanantesField, alergiasField].forEach(function (f) {
+    [acompanantesField, alergiasField, taxiField, cancionField].forEach(function (f) {
       if (!f) return;
       f.hidden = noViene;
       f.querySelectorAll('input, select, textarea').forEach(function (i) {
@@ -188,6 +193,35 @@
     }
   }
 
+  /* --- Campos de nombre de los acompañantes --- */
+function pintarNombresAcompanantes() {
+  if (!acompanantesNombres || !acompanantesSelect) return;
+
+  var cuantos = parseInt(acompanantesSelect.value, 10) || 0;
+  acompanantesNombres.innerHTML = '';
+
+  if (cuantos === 0) return;
+
+  for (var i = 1; i <= cuantos; i++) {
+    var wrap = document.createElement('div');
+    wrap.className = 'acompanante-item';
+
+    var label = document.createElement('label');
+    label.setAttribute('for', 'acompanante' + i);
+    label.textContent = 'Nombre del acompañante ' + i;
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.id = 'acompanante' + i;
+    input.name = 'acompanante' + i;
+    input.placeholder = 'Ej. Ana García Ruiz';
+
+    wrap.appendChild(label);
+    wrap.appendChild(input);
+    acompanantesNombres.appendChild(wrap);
+  }
+}
+
   if (form) {
     form.querySelectorAll('input[name="asistencia"]').forEach(function (r) {
       r.addEventListener('change', function () {
@@ -195,6 +229,12 @@
         updateConditionalFields();
       });
     });
+
+      if (acompanantesSelect) {
+    acompanantesSelect.addEventListener('change', pintarNombresAcompanantes);
+    pintarNombresAcompanantes();
+  }
+
 
     var nombreInput = form.querySelector('#nombre');
     if (nombreInput) {
@@ -236,18 +276,36 @@
       status.className = 'form__status';
       if (submitBtn) submitBtn.disabled = true;
 
+  var nombresAcompanantes = [];
+  if (asistencia.value !== 'no') {
+    var cuantos = parseInt(form.querySelector('#acompanantes').value, 10) || 0;
+    for (var i = 1; i <= cuantos; i++) {
+      var campoNombre = form.querySelector('#acompanante' + i);
+      if (campoNombre && campoNombre.value.trim()) {
+        nombresAcompanantes.push(campoNombre.value.trim());
+      }
+    }
+  }
+
+      
       var datos = {
-        nombre: nombre,
-        asistencia: asistencia.value,
-        acompanantes: asistencia.value === 'no'
-          ? 0
-          : parseInt(form.querySelector('#acompanantes').value, 10) || 0,
-        alergias: asistencia.value === 'no'
-          ? ''
-          : form.querySelector('#alergias').value.trim(),
-        comentarios: form.querySelector('#comentarios').value.trim(),
-        enviado: new Date().toISOString()
-      };
+  nombre: nombre,
+  asistencia: asistencia.value,
+  acompanantes: nombresAcompanantes.length,
+  acompanantesNombres: nombresAcompanantes,
+
+  alergias: asistencia.value === 'no'
+    ? ''
+    : form.querySelector('#alergias').value.trim(),
+  taxi: asistencia.value === 'no'                       
+    ? ''
+    : form.querySelector('#taxi').value,
+  cancion: asistencia.value === 'no'                    
+    ? ''
+    : form.querySelector('#cancion').value.trim(),
+  comentarios: form.querySelector('#comentarios').value.trim(),
+  enviado: new Date().toISOString()
+};
 
       // Se guarda localmente para que no se pierda la respuesta.
       try {
