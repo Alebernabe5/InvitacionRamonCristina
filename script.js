@@ -289,23 +289,23 @@ function pintarNombresAcompanantes() {
 
       
       var datos = {
-  nombre: nombre,
-  asistencia: asistencia.value,
-  acompanantes: nombresAcompanantes.length,
-  acompanantesNombres: nombresAcompanantes,
+        nombre: nombre,
+        asistencia: asistencia.value,
+        acompanantes: nombresAcompanantes.length,
+        acompanantesNombres: nombresAcompanantes,
 
-  alergias: asistencia.value === 'no'
-    ? ''
-    : form.querySelector('#alergias').value.trim(),
-  taxi: asistencia.value === 'no'                       
-    ? ''
-    : form.querySelector('#taxi').value,
-  cancion: asistencia.value === 'no'                    
-    ? ''
-    : form.querySelector('#cancion').value.trim(),
-  comentarios: form.querySelector('#comentarios').value.trim(),
-  enviado: new Date().toISOString()
-};
+        alergias: asistencia.value === 'no'
+          ? ''
+          : form.querySelector('#alergias').value.trim(),
+        taxi: asistencia.value === 'no'                       
+          ? ''
+          : form.querySelector('#taxi').value,
+        cancion: asistencia.value === 'no'                    
+          ? ''
+          : form.querySelector('#cancion').value.trim(),
+        comentarios: form.querySelector('#comentarios').value.trim(),
+        enviado: new Date().toISOString()
+      };
 
       // Se guarda localmente para que no se pierda la respuesta.
       try {
@@ -316,24 +316,19 @@ function pintarNombresAcompanantes() {
         /* localStorage no disponible: seguimos igualmente */
       }
 
-      // ---- AQUÍ CONECTAS TU BACKEND ----
-      // Ejemplo con Formspree / Google Apps Script / tu API:
-      //
-      // fetch('https://formspree.io/f/TU_ID', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      //   body: JSON.stringify(datos)
-      // })
-      //   .then(function (r) { if (!r.ok) throw new Error('Error'); return r.json(); })
-      //   .then(function () { mostrarExito(datos); })
-      //   .catch(function () {
-      //     status.textContent = 'No hemos podido enviarlo. Escríbenos a hola@ramonycristina.com';
-      //     status.className = 'form__status is-error';
-      //     if (submitBtn) submitBtn.disabled = false;
-      //   });
-
-      // Simulación de envío correcto (quita este bloque al conectar el backend):
-      setTimeout(function () { mostrarExito(datos); }, 900);
+           // ---- ENVÍO A GOOGLE SHEETS ----
+      fetch('https://script.google.com/macros/s/AKfycbyJqSkSG7vpbMHXctOCi5MWVBBrju6_w8hUuYiQL1S_VZqH-5kaGhuAgdGFy5TKYdUJvw/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(datos)
+      })
+        .then(function () { mostrarExito(datos); })
+        .catch(function () {
+          status.textContent = 'No hemos podido enviarlo. Escríbenos y lo apuntamos a mano.';
+          status.className = 'form__status is-error';
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 
