@@ -408,20 +408,34 @@ h1, h2, h3, h4 {
   flex: 1;
   min-width: 0;
   background: rgba(255, 255, 255, 0.62);
-  border: 1px solid var(--floral);
+  border: 1.5px solid var(--oro);
   border-radius: var(--radius);
   padding: 16px 6px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(198, 166, 107, 0.18);
 }
+
+/* segundo filete, como el aro doble del logotipo */
+.countdown__box::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(198, 166, 107, 0.45);
+  border-radius: 9px;
+  pointer-events: none;
+}
+
 
 .countdown__num {
   font-family: var(--serif);
   font-size: clamp(1.5rem, 6vw, 2.4rem);
   font-weight: 500;
-  color: var(--verde);
+  color: var(--oro);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -430,7 +444,7 @@ h1, h2, h3, h4 {
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--verde-suave);
+  color: var(--oro);
 }
 
 .hero__remaining {
@@ -1091,6 +1105,69 @@ h1, h2, h3, h4 {
 @media (prefers-reduced-motion: reduce) {
   .timer-arena { animation: none; }
 }
+
+/* ---------- ÁLBUM DE FOTOS ---------- */
+.album__illo {
+  display: block;
+  width: min(52vw, 170px);
+  height: auto;
+  margin: 26px auto 34px;
+}
+
+.album__qr {
+  display: inline-block;
+  width: min(58vw, 210px);
+  margin: 10px auto 22px;
+  padding: 14px;
+  background: #FFFFFF;
+  border: 1px solid rgba(198, 166, 107, 0.45);
+  border-radius: var(--radius);
+  transition: var(--tr);
+}
+
+.album__qr:hover {
+  transform: scale(1.04);
+  box-shadow: 0 10px 28px rgba(85, 91, 67, 0.14);
+}
+
+.album__qr img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.album__codigo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  color: var(--texto);
+  margin: 0;
+}
+
+.album__codigo svg {
+  width: 18px;
+  height: 18px;
+  color: var(--verde-suave);
+}
+
+.album__codigo-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--verde-suave);
+  margin: 0 0 8px;
+}
+
+@media (max-width: 760px) {
+  .album__illo { width: min(48vw, 140px); margin: 20px auto 28px; }
+  .album__qr { width: min(66vw, 190px); }
+}
+
+
+
 
 
 
