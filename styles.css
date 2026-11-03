@@ -839,7 +839,7 @@ h1, h2, h3, h4 {
 /* ---------- FORM ---------- */
 .form {
   margin-top: 44px;
-  background: var(--crema);
+  background: var(--crema-alt);
   border: 1px solid rgba(200, 197, 169, 0.85);
   border-radius: var(--radius);
   padding: 46px 38px;
