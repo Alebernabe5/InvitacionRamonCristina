@@ -21,11 +21,39 @@
   <!-- ============ PANTALLA DE SOBRE ============ -->
 <div class="sobre" id="sobre" role="button" tabindex="0"
      aria-label="Abrir la invitación">
-  <img class="sobre__img"
-       src="img/carta.png"
-       alt="Sobre de la invitación de Cristina y Ramón" />
-  <p class="sobre__pista">Pulsa para abrir</p>
+  <div class="sobre__escena">
+
+    <!-- cuerpo del sobre: cae hacia abajo -->
+    <div class="sobre__mitad sobre__mitad--inf" aria-hidden="true">
+      <span class="sobre__interior"></span>
+      <span class="sobre__pliegue sobre__pliegue--v sobre__pliegue--sombra"></span>
+      <span class="sobre__pliegue sobre__pliegue--v"></span>
+      <span class="sobre__pliegue sobre__pliegue--izq"></span>
+      <span class="sobre__pliegue sobre__pliegue--der"></span>
+    </div>
+
+    <!-- solapa: gira hacia arriba -->
+    <div class="sobre__mitad sobre__mitad--sup"></div>
+
+    <!-- los nombres, rectos y sin rotación -->
+    <div class="sobre__nombres">
+      <span>Cristina</span>
+      <i>&amp;</i>
+      <span>Ramón</span>
+    </div>
+
+    <!-- el sello -->
+    <div class="sobre__sello" aria-hidden="true">
+      <img src="img/sello.png" alt="" />
+    </div>
+  </div>
+
+  <p class="sobre__pista">
+    <span>Tenemos una noticia…</span>
+    <strong>¡Pulsa aquí y desliza!</strong>
+  </p>
 </div>
+
 
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">

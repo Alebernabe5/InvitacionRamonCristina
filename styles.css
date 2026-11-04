@@ -10,6 +10,7 @@
    --floral       #C8C5A9  ilustraciones florales
    ========================================================================== */
 
+   
 :root {
   --crema: #F8F6EF;
   --crema-alt: #EAE5D8;
@@ -1473,67 +1474,229 @@ h1, h2, h3, h4 {
 
 /* ---------- PANTALLA DE SOBRE ---------- */
 .sobre {
+  --papel: #F4F0E6;
+  --pico: 52%;     /* altura de la punta de la solapa y del sello */
+  --caida: min(40vw, 46vh);   /* cuánto baja la solapa: mantiene el ángulo en cualquier pantalla */
+  --hombro: calc(var(--pico) - var(--caida));   /* donde la solapa toca los laterales */
+  --base: calc(var(--pico) + var(--caida));     /* donde el pliegue inferior toca los laterales */
+  --lado: calc(var(--hombro) + var(--caida) * 0.18);   /* inicio de los pliegues laterales */
+  --grosor: 1.2px;
+
   position: fixed;
   inset: 0;
   z-index: 999;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(200, 197, 169, 0.35), transparent 60%),
-    var(--crema-alt);
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sobre.is-abierto { pointer-events: none; }
+
+/* La perspectiva va aquí porque esta capa lleva overflow: hidden */
+.sobre__escena {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  perspective-origin: 50% 0;
+  overflow: hidden;
+}
+
+.sobre__mitad {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* ---- cuerpo del sobre: tapa la web y cae al abrirse ---- */
+.sobre__mitad--inf {
+  z-index: 1;
+  background: var(--papel);
+  transition: transform 1s cubic-bezier(0.55, 0, 0.8, 0.45) 0.85s;
+}
+
+/* interior del sobre: oculto bajo la solapa, se ve al abrirla */
+.sobre__interior,
+.sobre__pliegue {
+  position: absolute;
+  inset: 0;
+}
+
+.sobre__interior {
+  background: linear-gradient(180deg, #DDD5C3 0%, #E9E2D3 100%);
+  clip-path: polygon(0 0, 100% 0, 100% var(--hombro), 50% var(--pico), 0 var(--hombro));
+}
+
+/* los pliegues son bandas finas, para que el ángulo no se deforme */
+.sobre__pliegue { background: rgba(150, 138, 114, 0.5); }
+
+.sobre__pliegue--v {
+  clip-path: polygon(
+    0 var(--base),
+    50% var(--pico),
+    100% var(--base),
+    100% calc(var(--base) + var(--grosor)),
+    50% calc(var(--pico) + var(--grosor)),
+    0 calc(var(--base) + var(--grosor))
+  );
+}
+
+.sobre__pliegue--sombra {
+  --grosor: 5px;
+  background: rgba(120, 108, 84, 0.1);
+}
+
+.sobre__pliegue--izq {
+  clip-path: polygon(
+    0 calc(var(--lado) + 9vw),
+    9% var(--lado),
+    9% calc(var(--lado) + var(--grosor)),
+    0 calc(var(--lado) + 9vw + var(--grosor))
+  );
+}
+
+.sobre__pliegue--der {
+  clip-path: polygon(
+    100% calc(var(--lado) + 9vw),
+    91% var(--lado),
+    91% calc(var(--lado) + var(--grosor)),
+    100% calc(var(--lado) + 9vw + var(--grosor))
+  );
+}
+
+.sobre.is-abierto .sobre__mitad--inf {
+  transform: translateY(100%);
+}
+
+/* ---- solapa: la sombra va en el padre y el recorte en ::before,
+        porque clip-path recortaría la sombra si estuvieran juntos ---- */
+.sobre__mitad--sup {
+  z-index: 2;
+  transform-origin: 50% 0;
+  filter: drop-shadow(0 3px 5px rgba(85, 75, 55, 0.28));
+  transition: transform 1.15s cubic-bezier(0.45, 0, 0.35, 1) 0.25s;
+}
+
+.sobre__mitad--sup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #F7F3EA 0%, var(--papel) 100%);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--hombro),
+    50% var(--pico),
+    0 var(--hombro)
+  );
+}
+
+.sobre.is-abierto .sobre__mitad--sup {
+  transform: rotateX(180deg);
+}
+
+/* ---- nombres ---- */
+.sobre__nombres {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  cursor: pointer;
-  transition: opacity 2.2s ease, visibility 2.2s ease;
-}
-
-/* al abrirse, la capa se desvanece */
-.sobre.is-abierto {
-  opacity: 0;
-  visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.35s ease;
 }
 
-/* el sobre, ocupando casi toda la pantalla */
-.sobre__img {
-  width: min(94vw, 720px);
-  max-height: 74vh;
-  height: auto;
-  object-fit: contain;
+.sobre__nombres span {
+  font-family: var(--script);
+  font-size: clamp(2.8rem, min(17vw, 10vh), 5rem);
+  line-height: 1.05;
+  color: var(--verde);
+}
+
+.sobre__nombres i {
+  font-family: var(--script);
+  font-size: clamp(2.3rem, min(13vw, 7.5vh), 3.8rem);
+  font-style: normal;
+  line-height: 1;
+  color: var(--oro);
+}
+
+/* ---- sello ---- */
+.sobre__sello {
+  position: absolute;
+  top: var(--pico);
+  left: 50%;
+  z-index: 4;
+  width: clamp(96px, min(25vw, 14vh), 150px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 4px 7px rgba(100, 80, 45, 0.35));
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.sobre__sello img {
   display: block;
-  transition: transform 2.2s cubic-bezier(0.34, 1.1, 0.64, 1);
+  width: 100%;
+  height: 100%;
 }
 
-/* al abrirse, se acerca un poco mientras se funde */
-.sobre.is-abierto .sobre__img {
-  transform: scale(1.05) translateY(-8px);
+.sobre.is-abierto .sobre__sello {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.25);
 }
 
+/* ---- texto inferior ---- */
 .sobre__pista {
-  margin-top: 34px;
-  font-size: 0.66rem;
-  letter-spacing: 0.28em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(70px, 13vh, 130px);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 16px;
+  text-align: center;
+  color: var(--texto);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sobre__pista span {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 5.5vw, 1.6rem);
+  letter-spacing: 0.04em;
+}
+
+.sobre__pista strong {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 5vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--verde-suave);
   animation: latirPista 2.4s ease-in-out infinite;
 }
 
 @keyframes latirPista {
-  0%, 100% { opacity: 0.45; }
+  0%, 100% { opacity: 0.55; }
   50%      { opacity: 1; }
 }
 
-/* bloquea el scroll mientras el sobre está cerrado */
+.sobre.is-abierto .sobre__nombres,
+.sobre.is-abierto .sobre__pista { opacity: 0; }
+
 body.sobre-activo { overflow: hidden; }
 
-@media (max-width: 760px) {
-  .sobre { padding: 16px; }
-  .sobre__img { width: 92vw; max-height: 66vh; }
-  .sobre__pista { margin-top: 26px; font-size: 0.6rem; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .sobre, .sobre__img { transition: none; }
-  .sobre__pista { animation: none; }
+  .sobre__mitad,
+  .sobre__sello,
+  .sobre__nombres,
+  .sobre__pista { transition: none; }
+
+  .sobre__pista strong { animation: none; }
 }

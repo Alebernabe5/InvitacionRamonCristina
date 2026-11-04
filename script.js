@@ -446,32 +446,51 @@ if (musicBtn && music) {
 var sobre = document.getElementById('sobre');
 
 if (sobre) {
+  var DURACION_SOBRE = 1900;   // lo que tarda en abrirse, en milisegundos
+  var DESLIZAMIENTO_MINIMO = 30;
+  var inicioToque = null;
+
   document.body.classList.add('sobre-activo');
 
   function abrirSobre() {
     if (sobre.classList.contains('is-abierto')) return;
 
     sobre.classList.add('is-abierto');
-    document.body.classList.remove('sobre-activo');
 
-    // Cuando la animación termina, retiramos la capa del todo
+    // Cuando la animación termina, retiramos la capa y dejamos hacer scroll
     setTimeout(function () {
       sobre.setAttribute('hidden', '');
-    }, 1100);
+      document.body.classList.remove('sobre-activo');
+    }, DURACION_SOBRE);
 
-    // Y aquí arrancamos la música, que ya viene de un clic real
     if (typeof music !== 'undefined' && music && music.paused) {
       music.play().catch(function () {});
     }
   }
 
   sobre.addEventListener('click', abrirSobre);
+
   sobre.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       abrirSobre();
     }
   });
+
+  // Deslizar el dedo también abre el sobre
+  sobre.addEventListener('touchstart', function (e) {
+    inicioToque = e.touches[0].clientY;
+  }, { passive: true });
+
+  sobre.addEventListener('touchend', function (e) {
+    if (inicioToque === null) return;
+    var distancia = Math.abs(e.changedTouches[0].clientY - inicioToque);
+    inicioToque = null;
+    if (distancia > DESLIZAMIENTO_MINIMO) abrirSobre();
+  });
+
+  // Y en ordenador, la rueda del ratón
+  sobre.addEventListener('wheel', abrirSobre, { passive: true });
 }
 
 
