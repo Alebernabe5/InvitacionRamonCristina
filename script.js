@@ -317,7 +317,7 @@ function pintarNombresAcompanantes() {
       }
 
            // ---- ENVÍO A GOOGLE SHEETS ----
-      fetch('https://script.google.com/macros/s/AKfycbyJqSkSG7vpbMHXctOCi5MWVBBrju6_w8hUuYiQL1S_VZqH-5kaGhuAgdGFy5TKYdUJvw/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbw7Sxw9BFUlKa3QRXboQLud5FTLFHAQKSzCydYNtgsUodUj9dYjF_UZu3G-VhXgnypD1g/exec', {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
